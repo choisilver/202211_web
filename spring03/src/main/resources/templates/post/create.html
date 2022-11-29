@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{ layout/layout }">
+
+ 	<div layout:fragment="content">
+        <div class="card my-2">
+            <div class="card-header">
+                <h1>포스트 작성 페이지</h1>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="my-2">
+                        <label for="title" class="form-label">제목</label>
+                        <input id="title" name="title" class="form-control" type="text" required autofocus>
+                    </div>
+                    <div class="my-2">
+                        <label for="content" class="form-label">내용</label>
+                        <textarea id="content" name="content" class="form-control" required></textarea>
+                    </div>
+                    <div class="my-2">
+                        <label for="author" class="form-label">작성자</label>
+                        <input id="author" class="form-control"  
+                            name="author" type="text">
+                    </div>
+                    <div class="my=2">
+                        <input type="submit" class="form-control btn btn-success" 
+                        value="작성완료" required>
+                    </div>
+                    
+                </form>
+                
+            </div>
+            
+        </div>
+    </div>
+
+</html>

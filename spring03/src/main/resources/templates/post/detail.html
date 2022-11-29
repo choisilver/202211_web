@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{ layout/layout }">
+    
+    <div layout:fragment="content">
+        <div class="card my-2">
+            <div class="card-header">
+                <h1>포스트 상세 페이지</h1>
+            </div>
+            <div class="card-body">
+                <form action="">
+                    <div class="my-2">
+                        <label for="id" class="form-label">포스트 번호</label>
+                        <input id="id" class="form-control" th:value="${ post.id }"  readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="title" class="form-label">제목</label>
+                        <input id="title" class="form-control" th:value="${ post.title }"  readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="content" class="form-label">내용</label>
+                        <textarea id="content" class="form-control" th:text="${ post.content  }"  readonly ></textarea>
+                    </div>
+                    <div class="my-2">
+                        <label for="author" class="form-label">작성자</label>
+                        <input id="author" class="form-control" th:value="${ post.author }"  readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="createdTime" class="form-label">작성시간</label>
+                        <input id="createdTime" class="form-control" th:value="${ #temporals.format( post.createdTime ,'yyyy-MM-dd HH:mm') }"  readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="modifiedTime" class="form-label">수정시간</label>
+                        <input id="modifiedTime" class="form-control" th:value="${ #temporals.format( post.modifiedTime, 'yyyy-MM-dd HH:mm' )}"  readonly />
+                    </div>
+                </form>
+                <div class="my-2">
+                    <a class="btn btn-primary" 
+                        th:href="@{ /post/modify?id={id} (id=${ post.id }) }">수정하기</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- 댓글 작성 -->
+        <div class="card my-4">
+            <div class="card-header">
+                <div class="col-4">
+                    <input type="text" class="form-control"  id="writer" placeholder="작성자"/>
+                </div>
+            </div>
+            <div class="card-body row">
+                <div class="col-10">
+                    <textarea class="form-control" id="replyText" 
+                    placeholder="댓글 작성"></textarea>
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-outline-secondary" id="btnReplyRegister">등록</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- 댓글 리스트 영역 -->
+        <hr/>
+        <div id="replies"></div>  <!--  -->
+        
+        
+        <!-- 댓글 수정/삭제 Modal -->
+        <div class="modal fade" id="replyModal" tabindex="-1"
+                                                aria-labelledby="replyModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="replyModalLabel">댓글 수정</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <!-- 댓글 아이디 삽입 위치 -->
+                <input type="hidden"  id="modalReplyId"  readonly  />
+                <!-- 댓글 내용 삽입 위치 -->
+                <textarea id="modalReplyText" class="form-control"></textarea>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" id="modalBtnDelete" class="btn btn-outline-danger">삭제</button>
+                <button type="button" id="modalBtnUpdate" class="btn btn-outline-success">수정 완료</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- Modal end --> -->
+        
+        
+    </div> <!-- layout:fragment="content" 끝 -->
+    
+    
+ 	<th:block layout:fragment="script">
+        <!-- Ajax를 사용하기 위한 axios 자바스크립트 라이브러리 추가 -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- 댓글 관련 자바스크립트 함수/코드들을 작성한 스크립트 파일 -->
+        <script th:src="@{ /js/reply.js }"></script>
+        
+    </th:block>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{ layout/basic-layout.html }">
+    
+    <!--/* layout/basic-layout.html 파일의 "content" 레이아웃 프래그먼트를 채워줄 내용. 이름을 동일하게  */-->    
+    <!--/* layout 안에 안넣으면 안보 */-->
+    <div layout:fragment="content">
+        <div>
+            <h1>[[${msg}]]</h1>
+        </div>
+    </div>
+    
+    
+ 
+ 
+    <script layout:fragment="script" th:inline="javascript">
+   
+    console.log('Thymeleaf 레이아웃 기능');
+    </script>
+</html>
